@@ -10,6 +10,20 @@ router.get("/", (req, res) => {
     .catch(() => res.status(500).json({ message: "An error occurred." }));
 });
 
+router.get("/:id/resources", (req, res) => {
+  projectDB
+    .getAllProjectResources(req.params.id)
+    .then((resources) => res.status(200).json(resources))
+    .catch(() => res.status(500).json({ message: "bad news" }));
+});
+
+router.get("/:id/tasks", (req, res) => {
+  projectDB
+    .getAllProjectTasks(req.params.id)
+    .then((tasks) => res.status(200).json(tasks))
+    .catch(() => res.status(500).json({ message: "bad news" }));
+});
+
 router.post("/", (req, res) => {
   projectObj = {};
   if (!req.body.name) {
